@@ -1,0 +1,34 @@
+{
+    "account": "tealium",
+    "profile": "main",
+    "env": "prod",
+    "data": {
+        "dom": {
+            "referrer": "",
+            "domain": "tealium.com",
+            "title": "Tealium | Customer Data Hub and Enterprise Tag Management",
+            "query_string": "",
+            "url": "http://tealium.com/",
+            "pathname": "/"
+        },
+        "udo": {
+            "tealium_event": "page_view",
+            "page_name": "Tealium | Customer Data Hub and Enterprise Tag Management",
+            "page_type": "home",
+            "device_type": "desktop"
+        },
+        "firstparty_tealium_cookies": {
+            "trace_id": "",
+            "s_fid": "3EF757DF6253B144-0D0194366CD4479B",
+            "utag_main_ses_id": 1383677957942,
+            "s_cc": "true",
+            "utag_main__st": 1383678970903,
+            "TID": "2cff51e585ed4a5a9330324d5dbc6bb7",
+            "s_sq": "[[B]]"
+        }
+    },
+    "post_time": 1500999541000,
+    "useragent": "PostmanRuntime/6.1.6",
+    "event_id": "1a1ee055-1456-46f8-ab4d-779628c05dd4",
+    "visitor_id": "1a1ee055145646f8ab4d779628c05dd4"
+}
