@@ -26,9 +26,11 @@ public class Tealium2Split implements HttpFunction {
 
 	public void service(HttpRequest request, HttpResponse response) throws Exception {
 		long start = System.currentTimeMillis();
-
+		System.out.println("INFO received Tealium events for transformation"); 
+		
 		String environment = kEnvironmentName;
 		Map<String, List<String>> queryParameters = request.getQueryParameters();
+		System.out.println("DEBUG query parameters: " + queryParameters);
 		if(queryParameters.containsKey("environment")) {
 			environment = queryParameters.get("environment").get(0);
 		}
@@ -44,7 +46,7 @@ public class Tealium2Split implements HttpFunction {
 		
 		JSONObject eventObj = new JSONObject(requestBody);
 		List<JSONObject> events = new LinkedList<JSONObject>();
-		System.out.println(eventObj.toString(2));
+//		System.out.println(eventObj.toString(2));
 		events.add(eventObj);
 		
 		JSONArray splitEvents = new JSONArray();
@@ -79,13 +81,17 @@ public class Tealium2Split implements HttpFunction {
 			
 			splitEvents.put(event);
 		}
-		System.out.println("===============================");
-		System.out.println("===============================");
-
-		System.out.println(splitEvents.toString(2));
-		CreateEvents.doPost(splitEvents);
-		
-		System.out.println("finished in " + (System.currentTimeMillis() - start) + "ms");
+//		System.out.println("===============================");
+//		System.out.println("===============================");
+		if(!queryParameters.containsKey("apiToken")) {
+			System.err.println("ERROR no apiToken specified; can't send events to Split!");
+		} else {
+			List<String> list = queryParameters.get("apiToken");
+			System.out.println("INFO sending " + splitEvents.length() + " events to Split...");
+			CreateEvents create = new CreateEvents(list.get(0));
+			create.doPost(splitEvents);
+		}		
+		System.out.println("INFO finished in " + (System.currentTimeMillis() - start) + "ms");
 	}
 
 	private void putProperties(Map<String, Object> properties, String prefix, JSONObject obj) {

@@ -9,9 +9,13 @@ import org.json.JSONArray;
 
 public class CreateEvents {
 
-	static String API_TOKEN = "1s46c6r6tfl9m7usijqsmicfckm04mn8b321";
+	private String apiToken;
 	
-	public static void
+	public CreateEvents(String apiToken) {
+		this.apiToken = apiToken;
+	}
+	
+	public void
 	doPost(JSONArray events) throws Exception {
 	    CloseableHttpClient client = HttpClients.createDefault();
 	    HttpPost httpPost = new HttpPost("https://events.split.io/api/events/bulk");
@@ -19,7 +23,7 @@ public class CreateEvents {
 		StringEntity entity = new StringEntity(events.toString());
 	    httpPost.setEntity(entity);
 	    httpPost.setHeader("Content-type", "application/json");
-	    httpPost.setHeader("Authorization", "Bearer " + API_TOKEN);
+	    httpPost.setHeader("Authorization", "Bearer " + apiToken);
 	 
 	    CloseableHttpResponse response = client.execute(httpPost);
 	    System.out.println(response.getStatusLine());
